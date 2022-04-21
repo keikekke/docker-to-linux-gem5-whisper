@@ -13,7 +13,7 @@ ubuntu: ubuntu.img
 .PHONY:
 alpine: alpine.img
 
-%.tar:
+%.tar: %/Dockerfile
 	@echo ${COL_GRN}"[Dump $* directory structure to tar archive]"${COL_END}
 	docker build -f $*/Dockerfile -t ${REPO}/$* .
 	docker export -o $*.tar `docker run -d ${REPO}/$* /bin/true`
@@ -21,7 +21,7 @@ alpine: alpine.img
 %.dir: %.tar
 	@echo ${COL_GRN}"[Extract $* tar archive]"${COL_END}
 	mkdir -p $*.dir
-	tar -xvf $*.tar -C $*.dir
+	tar -xf $*.tar -C $*.dir
 
 %.img: builder %.dir
 	@echo ${COL_GRN}"[Create $* disk image]"${COL_END}
