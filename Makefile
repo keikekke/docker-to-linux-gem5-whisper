@@ -13,6 +13,9 @@ ubuntu: ubuntu.img
 .PHONY:
 alpine: alpine.img
 
+.PHONY:
+m5: m5.img
+
 %.tar: %/Dockerfile
 	@echo ${COL_GRN}"[Dump $* directory structure to tar archive]"${COL_END}
 	docker build -f $*/Dockerfile -t ${REPO}/$* .
@@ -49,7 +52,7 @@ builder-interactive:
 .PHONY:
 clean: clean-docker-procs clean-docker-images
 	@echo ${COL_GRN}"[Remove leftovers]"${COL_END}
-	rm -rf mnt debian.* alpine.* ubuntu.*
+	rm -rf mnt debian.* alpine.* ubuntu.* m5.*
 
 .PHONY:
 clean-docker-procs:
