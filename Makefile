@@ -46,6 +46,7 @@ builder:
 builder-interactive:
 	docker run -it \
 		-v `pwd`:/os:rw \
+		--privileged \
 		--cap-add SYS_ADMIN \
 		${REPO}/builder bash
 
