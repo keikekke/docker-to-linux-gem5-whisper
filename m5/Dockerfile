@@ -10,8 +10,8 @@ ENV DEBIAN_FRONTEND noninteractive
 
 # install dependencies
 RUN apt install -y git python build-essential autoconf libtool scons
-RUN apt install -y pkg-config libconfig-dev libelf-dev libglib2.0-dev libboost-log-dev
-RUN apt install -y libevent-dev
+#RUN apt install -y pkg-config libconfig-dev libelf-dev libglib2.0-dev libboost-log-dev
+#RUN apt install -y libevent-dev
 RUN apt install -y gdb
 
 # copy m5 and set it up
@@ -44,12 +44,14 @@ RUN ./configure CFLAGS='-g3 -O0' CXXFLAGS='-g3 -O0'
 RUN make
 
 # cleanup
-RUN apt purge -y git python build-essential autoconf libtool scons
-RUN apt purge -y pkg-config libconfig-dev libelf-dev libglib2.0-dev libboost-log-dev
-RUN apt purge -y libevent-dev
-RUN apt autoremove -y
+#RUN apt purge -y git python build-essential autoconf libtool scons
+#RUN apt purge -y pkg-config libconfig-dev libelf-dev libglib2.0-dev libboost-log-dev
+#RUN apt purge -y libevent-dev
+#RUN apt autoremove -y
 
 RUN rm -rf /gem5
+
+RUN apt install -y vim
 
 WORKDIR /work/whisper
 
