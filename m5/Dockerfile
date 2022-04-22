@@ -35,9 +35,6 @@ RUN git submodule update --depth=1 --init nstore
 
 WORKDIR /work/whisper/nstore
 
-# change path because /dev/shm has only 64MB, while we need 1GB
-RUN sed -i 's|/dev/shm/zfile|/work/zfile|g' src/main.cpp
-
 # build ycsb with debug option
 RUN ./bootstrap
 RUN ./configure CFLAGS='-g3 -O0' CXXFLAGS='-g3 -O0'
