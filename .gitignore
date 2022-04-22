@@ -4,3 +4,5 @@ linux.*
 alpine.*
 debian.*
 ubuntu.*
+m5.*
+*-m5.img
