@@ -15,16 +15,13 @@ RUN scons -C util/m5 build/x86/out/m5
 
 # download and build Whisper
 WORKDIR /work
-
 RUN git clone https://github.com/swapnilh/whisper.git --depth=1
 
 WORKDIR /work/whisper
-
 RUN git submodule update --depth=1 --init nstore
 
-WORKDIR /work/whisper/nstore
-
 # build ycsb with debug option
+WORKDIR /work/whisper/nstore
 RUN ./bootstrap
 RUN ./configure CFLAGS='-O2' CXXFLAGS='-O2'
 RUN make
@@ -40,7 +37,6 @@ RUN apt-get -y install \
 RUN echo "root:root" | chpasswd
 
 COPY --from=builder /gem5/gem5/util/m5/build/x86/out/m5 /sbin/m5
-RUN ln -s /sbin/m5 /sbin/gem5
 
 WORKDIR /work/whisper
 COPY --from=builder /work/whisper .
